@@ -1,0 +1,17 @@
+README.md
+pyproject.toml
+src/dspy-tot/__init__.py
+src/dspy-tot/dataset.py
+src/dspy-tot/evaluation.py
+src/dspy-tot/main.py
+src/dspy-tot/modules.py
+src/dspy-tot/signatures.py
+src/dspy-tot/test_tot.py
+src/dspy-tot/tree_of_thought.py
+src/dspy-tot/methods/bfs.py
+src/dspy-tot/prompts/text.py
+src/dspy_tot.egg-info/PKG-INFO
+src/dspy_tot.egg-info/SOURCES.txt
+src/dspy_tot.egg-info/dependency_links.txt
+src/dspy_tot.egg-info/requires.txt
+src/dspy_tot.egg-info/top_level.txt

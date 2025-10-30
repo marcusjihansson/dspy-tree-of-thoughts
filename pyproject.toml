@@ -1,0 +1,10 @@
+[project]
+name = "dspy-tot"
+version = "0.1.0"
+description = "Model-agnostic Tree-of-Thought reasoning implementation using DSPy and OpenRouter"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "dspy-ai>=3.0.3",
+    "numpy>=1.20.0",
+]

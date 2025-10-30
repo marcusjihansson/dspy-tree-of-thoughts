@@ -1,0 +1,345 @@
+# DSPy Tree-of-Thought - Model Agnostic Implementation
+
+A model-agnostic implementation of tree-of-thought reasoning using DSPy and OpenRouter, adapted from the original [tree-of-thought-llm](https://github.com/princeton-nlp/tree-of-thought-llm) repository.
+
+## Overview
+
+This project demonstrates how tree-of-thought reasoning can be implemented in a **model-agnostic** way using the DSPy framework and OpenRouter. Unlike the original implementation that was tied to specific model APIs (OpenAI, Claude), this version works with **any model** available through OpenRouter - including open source models, proprietary models, and new models as they become available.
+
+## Key Features
+
+- **🔄 Model Agnostic**: Works with any model supported by OpenRouter (OpenAI, Anthropic, Meta, Google, Mistral, etc.)
+- **🧩 DSPy Framework**: Built on DSPy for better modularity and composability  
+- **🌐 OpenRouter Integration**: Single API for accessing 100+ models from different providers
+- **⚡ Easy Model Switching**: Change models via environment variables without code changes
+- **🔧 Consistent Interface**: Same code works across different model architectures
+
+## What Was Implemented
+
+### Core Components
+
+1. **Dataset (`dataset.py`)**: DSPy-compatible dataset for text generation tasks
+   - Loads text data with ending sentence constraints
+   - Provides train/dev/test splits
+   - Compatible with DSPy's Example format
+
+2. **DSPy Modules (`modules.py`)**: Reusable components for reasoning
+   - `TextGenerator`: Generates coherent passages (standard and CoT)
+   - `TextEvaluator`: Evaluates passage coherency (1-10 scale)
+   - `TextVoter`: Votes among multiple passage candidates
+   - `TextComparator`: Compares coherency of passage pairs
+
+3. **Tree-of-Thought Algorithm (`tree_of_thought.py`)**: Core reasoning engine
+   - Adapted BFS algorithm from original implementation
+   - Supports generation → evaluation → selection loop
+   - Configurable evaluation methods (value scoring, voting)
+   - Configurable selection methods (greedy, sampling)
+
+4. **Evaluation System (`evaluation.py`)**: Robust evaluation using DSPy
+   - Coherency scoring with multiple samples
+   - Passage ranking and comparison
+   - Error handling for LM failures
+
+### Key Adaptations from Original
+
+- **🚫 Removed Model Dependencies**: No direct OpenAI/Claude API dependencies
+- **🔧 DSPy LM Abstraction**: Uses DSPy's unified language model interface  
+- **🌐 OpenRouter Integration**: Single API for 100+ models from different providers
+- **🧩 Modular Design**: Converted monolithic task classes to reusable DSPy modules
+- **📝 Signature-Based**: Transformed hardcoded prompts into DSPy signatures
+- **📊 Dataset Integration**: Adapted custom task interface to DSPy datasets
+- **⚡ Easy Model Switching**: Change models via environment variables
+
+## File Structure
+
+```
+src/dspy-tot/
+├── __init__.py          # Package initialization and exports
+├── dataset.py           # Text generation dataset
+├── modules.py           # DSPy modules (generator, evaluator, etc.)
+├── tree_of_thought.py   # Core ToT algorithm
+├── evaluation.py        # Evaluation system
+├── test_tot.py          # Proof of concept demonstration
+└── data/
+    └── text/
+        └── data_100_random_text.txt  # Dataset from original repo
+```
+
+## Setup and Usage
+
+### Quick Setup
+
+Run the automated setup script:
+```bash
+./setup.sh
+```
+
+This will:
+- Create your `.env` file from the template
+- Check for and install required packages
+- Provide clear next steps
+
+### Manual Setup
+
+If you prefer to set up manually:
+
+1. **Install Dependencies**: 
+   ```bash
+   pip install dspy-ai numpy
+   ```
+
+2. **Get OpenRouter API Key**: 
+   - Sign up at [OpenRouter](https://openrouter.ai) 
+   - Get your API key from the dashboard
+   - OpenRouter provides access to 100+ models from different providers
+
+3. **Configure Environment**: 
+   ```bash
+   cp .env.example .env
+   # Edit .env and add your OPENROUTER_API_KEY
+   ```
+
+4. **Choose Your Model** (optional):
+   ```bash
+   # Set MODEL_ID in .env or as environment variable
+   export MODEL_ID="anthropic/claude-3.5-sonnet"  # Default
+   # Or try: openai/gpt-4, meta-llama/llama-3.1-8b-instruct, etc.
+   ```
+
+### Running the Demo
+
+You can run the demo in two ways:
+
+**Option 1: From project root (recommended)**
+```bash
+python run_demo.py
+```
+
+**Option 2: Directly from the source directory**
+```bash
+cd src/dspy-tot
+python main.py
+```
+
+**Option 3: Test multiple models**
+```bash
+cd src/dspy-tot
+python test_models.py
+```
+
+The demo will:
+- Check for your OpenRouter API key
+- Configure DSPy with your chosen model via OpenRouter
+- Create text generation and evaluation modules  
+- Run tree-of-thought reasoning on a sample text generation task
+- Display the generated coherent passages
+
+### Expected Output
+
+When you run the demo, you should see output like:
+```
+Configured DSPy with OpenRouter LM: openai/gpt-4
+=== Step 1 ===
+Generated 3 candidates
+Selected 2 best candidates
+Best candidate preview: [passage preview]...
+=== Step 2 ===
+...
+Generated passages:
+[Final coherent passage with 4 paragraphs]
+```
+
+## Available Models
+
+This implementation works with **any model available on OpenRouter**. Some popular options:
+
+### Anthropic Models
+- `anthropic/claude-3.5-sonnet` (default) - Excellent reasoning capabilities
+- `anthropic/claude-3-haiku` - Faster, cost-effective option
+
+### OpenAI Models  
+- `openai/gpt-4` - High-quality reasoning
+- `openai/gpt-4-turbo` - Faster GPT-4 variant
+- `openai/gpt-3.5-turbo` - Cost-effective option
+
+### Open Source Models
+- `meta-llama/llama-3.1-8b-instruct` - Good open source option
+- `meta-llama/llama-3.1-70b-instruct` - Larger, more capable
+- `mistralai/mistral-7b-instruct` - European open source
+
+### Google Models
+- `google/gemini-pro-1.5` - Google's flagship model
+
+### Switching Models
+
+Change models easily via environment variable:
+
+```bash
+# Use Claude 3.5 Sonnet (default)
+export MODEL_ID="anthropic/claude-3.5-sonnet"
+
+# Switch to GPT-4
+export MODEL_ID="openai/gpt-4"  
+
+# Try an open source model
+export MODEL_ID="meta-llama/llama-3.1-8b-instruct"
+
+# Then run the demo
+python run_demo.py
+```
+
+No code changes required! The same tree-of-thought implementation works across all models.
+
+## Multiple Search Strategies
+
+This implementation supports **6 different search algorithms**, making it one of the most comprehensive Tree-of-Thought frameworks available:
+
+### 🔍 Available Search Strategies
+
+| Strategy | Type | Best For | Key Benefit |
+|----------|------|----------|-------------|
+| **BFS** | Breadth-First | Text generation, balanced exploration | Original ToT approach, systematic |
+| **DFS** | Depth-First | Crosswords, constraint problems | Memory efficient, deep exploration |
+| **MCTS** | Monte Carlo | Complex reasoning, creative tasks | Exploration/exploitation balance |
+| **A*** | Heuristic-guided | Math problems, optimal solutions | Theoretically optimal paths |
+| **Beam** | Top-K selection | Efficient quality balance | Fast convergence, controlled search |
+| **Best-First** | Greedy heuristic | Real-time applications | Fastest decisions |
+
+### 🚀 Easy Strategy Switching
+
+```bash
+# Use different search strategies with the same code
+python demo_search_strategies.py
+
+# Or test individual strategies
+cd src/dspy-tot
+python -c "
+tot.solve_with_search(sentences, search_strategy='mcts')  # Monte Carlo
+tot.solve_with_search(sentences, search_strategy='dfs')   # Depth-First  
+tot.solve_with_search(sentences, search_strategy='beam') # Beam Search
+"
+```
+
+### 📊 Strategy Selection Guide
+
+- **Text Generation**: BFS or Beam Search for diverse, coherent exploration
+- **Crossword/Puzzles**: DFS or A* for constraint satisfaction  
+- **Math Problems**: MCTS or A* for balanced reasoning
+- **Creative Writing**: MCTS or Beam for exploration of possibilities
+- **Real-time Apps**: Best-First or Beam for speed
+
+See [`SEARCH_STRATEGIES.md`](src/dspy-tot/SEARCH_STRATEGIES.md) for detailed strategy comparison and tuning guide.
+
+### Basic Usage
+
+```python
+import os
+import dspy
+from dspy_tot import TreeOfThought, create_text_generator, create_text_evaluator
+
+# Configure DSPy with OpenRouter - works with any model!
+model_id = os.getenv("MODEL_ID", "anthropic/claude-3.5-sonnet")
+api_key = os.getenv("OPENROUTER_API_KEY")
+os.environ["OPENAI_API_KEY"] = api_key  # DSPy compatibility
+
+lm = dspy.LM(
+    model_id,
+    max_tokens=8000,
+    temperature=0.7,
+    api_base="https://openrouter.ai/api/v1"
+)
+dspy.configure(lm=lm)
+
+# Create modules
+generator = create_text_generator(use_cot=True)
+evaluator = create_text_evaluator()
+
+# Create tree-of-thought solver
+tot = TreeOfThought(
+    generate_module=generator,
+    evaluate_module=evaluator
+)
+
+# Solve a text generation task
+ending_sentences = [
+    "It caught him off guard that space smelled of seared steak.",
+    "People keep telling me orange but I still prefer pink.",
+    "Each person who knows you has a different perception of who you are."
+]
+
+result = tot.solve(
+    ending_sentences=ending_sentences,
+    steps=2,
+    n_generate_sample=3,
+    n_evaluate_sample=2,
+    verbose=True
+)
+
+print("Generated passages:")
+for passage in result['passages']:
+    print(passage)
+```
+
+## Task Description
+
+The implemented system focuses on the **text generation task** from the original repository:
+
+- **Input**: 4 sentences that must appear as the ending sentences of 4 paragraphs
+- **Output**: A coherent 4-paragraph passage where each paragraph ends with one of the input sentences
+- **Evaluation**: Coherency scoring based on how well the passage flows together
+
+Example input:
+```
+"It isn't difficult to do a handstand if you just stand on your hands. It caught him off guard that space smelled of seared steak. When she didn't like a guy who was trying to pick her up, she started using sign language. Each person who knows you has a different perception of who you are."
+```
+
+## Key Features
+
+### Tree-of-Thought Algorithm
+- **Generation**: Creates multiple passage candidates per step
+- **Evaluation**: Scores candidates using coherency metrics
+- **Selection**: Chooses best candidates for next iteration
+- **Iteration**: Refines solutions over multiple steps
+
+### DSPy Integration
+- **Signatures**: Structured I/O for different reasoning tasks
+- **Modules**: Reusable components with learnable parameters
+- **LM Abstraction**: Works with any DSPy-supported language model
+- **Optimization**: Can be optimized using DSPy's teleprompters
+
+### Evaluation Methods
+- **Value-based**: Direct coherency scoring (1-10 scale)
+- **Vote-based**: Tournament-style voting among candidates
+- **Comparison**: Pairwise coherency comparisons
+
+## Comparison with Original
+
+| Aspect | Original Implementation | DSPy Implementation |
+|--------|------------------------|-------------------|
+| LM Interface | Direct OpenAI API | DSPy LM abstraction |
+| Task Structure | Custom Task class | DSPy Dataset |
+| Prompts | Hardcoded strings | DSPy signatures |
+| Modularity | Monolithic | Modular components |
+| Optimization | Manual | DSPy teleprompters |
+| Extensibility | Task-specific | General framework |
+
+## Next Steps
+
+1. **LM Configuration**: Test with different DSPy LM configurations
+2. **Optimization**: Use DSPy's optimization techniques to improve prompts
+3. **Extension**: Apply to other reasoning tasks (math, planning, etc.)
+4. **Evaluation**: Compare performance with baseline methods
+5. **UI/Interface**: Add web interface for interactive exploration
+
+## Files Adapted from Original
+
+The following files from `tree-of-thought-llm/src/tot/` were adapted:
+
+- `methods/bfs.py` → `tree_of_thought.py` (core algorithm)
+- `prompts/text.py` → `modules.py` (signatures)
+- `tasks/text.py` → `dataset.py` (data loading)
+- `data/text/` → `data/text/` (unchanged)
+
+## License
+
+This implementation is based on the tree-of-thought-llm repository. Please refer to the original repository for licensing information.

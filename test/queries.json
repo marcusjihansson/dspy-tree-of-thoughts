@@ -1,0 +1,10 @@
+[
+  { "id": "q1", "tier": "easy", "text": "What is DSPy?" },
+  { "id": "q2", "tier": "easy", "text": "What problem does 'programming, not prompting' aim to solve?" },
+  { "id": "q3", "tier": "easy", "text": "List key components or modules in DSPy." },
+  { "id": "q4", "tier": "easy", "text": "How does DSPy integrate with LLMs?" },
+  { "id": "q5", "tier": "smoke", "text": "Extract a structured overview of DSPy: modules, abstractions, learning methods; return JSON matching the provided schema and cite sources." },
+  { "id": "q6", "tier": "smoke", "text": "Identify robustness-oriented DSPy components; provide mechanisms, when to use, quotes with source titles, and confidence scores." },
+  { "id": "q7", "tier": "stress", "text": "Disambiguate 'DSPy' from similarly named libraries; ground all claims only in provided sources; mark unsupported claims as 'Unverified'." },
+  { "id": "q8", "tier": "stress", "text": "Propose an evaluation matrix for DSPy pipelines (correctness, calibration, reasoning depth, robustness); provide metrics and expected baselines." }
+]

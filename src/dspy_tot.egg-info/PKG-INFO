@@ -1,0 +1,175 @@
+Metadata-Version: 2.4
+Name: dspy-tot
+Version: 0.1.0
+Summary: Add your description here
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+Requires-Dist: dspy-ai>=3.0.3
+
+# DSPy Tree-of-Thought Implementation
+
+A proof-of-concept implementation of tree-of-thought reasoning in DSPy, adapted from the original [tree-of-thought-llm](https://github.com/princeton-nlp/tree-of-thought-llm) repository.
+
+## Overview
+
+This project demonstrates how the tree-of-thought reasoning approach can be implemented within the DSPy framework. Tree-of-thought is a prompting strategy that explores multiple solution paths through iterative generation, evaluation, and selection steps.
+
+## What Was Implemented
+
+### Core Components
+
+1. **Dataset (`dataset.py`)**: DSPy-compatible dataset for text generation tasks
+   - Loads text data with ending sentence constraints
+   - Provides train/dev/test splits
+   - Compatible with DSPy's Example format
+
+2. **DSPy Modules (`modules.py`)**: Reusable components for reasoning
+   - `TextGenerator`: Generates coherent passages (standard and CoT)
+   - `TextEvaluator`: Evaluates passage coherency (1-10 scale)
+   - `TextVoter`: Votes among multiple passage candidates
+   - `TextComparator`: Compares coherency of passage pairs
+
+3. **Tree-of-Thought Algorithm (`tree_of_thought.py`)**: Core reasoning engine
+   - Adapted BFS algorithm from original implementation
+   - Supports generation → evaluation → selection loop
+   - Configurable evaluation methods (value scoring, voting)
+   - Configurable selection methods (greedy, sampling)
+
+4. **Evaluation System (`evaluation.py`)**: Robust evaluation using DSPy
+   - Coherency scoring with multiple samples
+   - Passage ranking and comparison
+   - Error handling for LM failures
+
+### Key Adaptations from Original
+
+- **LM Abstraction**: Replaced direct OpenAI API calls with DSPy's LM system
+- **Modular Design**: Converted monolithic task classes to DSPy modules
+- **Signature-Based**: Transformed hardcoded prompts into DSPy signatures
+- **Dataset Integration**: Adapted custom task interface to DSPy datasets
+
+## File Structure
+
+```
+src/dspy-tot/
+├── __init__.py          # Package initialization and exports
+├── dataset.py           # Text generation dataset
+├── modules.py           # DSPy modules (generator, evaluator, etc.)
+├── tree_of_thought.py   # Core ToT algorithm
+├── evaluation.py        # Evaluation system
+├── test_tot.py          # Proof of concept demonstration
+└── data/
+    └── text/
+        └── data_100_random_text.txt  # Dataset from original repo
+```
+
+## Usage
+
+### Prerequisites
+
+1. **Install DSPy**: `pip install dspy-ai`
+2. **Set API Key**: `export OPENAI_API_KEY='your-openai-api-key'`
+3. **Install dependencies**: `pip install openai` (if needed)
+
+### Basic Usage
+
+```python
+import dspy
+from dspy_tot import TreeOfThought, create_text_generator, create_text_evaluator
+
+# Configure DSPy (adjust based on your DSPy version)
+lm = dspy.LM('openai/gpt-4', max_tokens=1000, temperature=0.7)
+dspy.configure(lm=lm)
+
+# Create modules
+generator = create_text_generator(use_cot=True)
+evaluator = create_text_evaluator()
+
+# Create tree-of-thought solver
+tot = TreeOfThought(
+    generate_module=generator,
+    evaluate_module=evaluator
+)
+
+# Solve a text generation task
+ending_sentences = [
+    "It caught him off guard that space smelled of seared steak.",
+    "People keep telling me orange but I still prefer pink.",
+    "Each person who knows you has a different perception of who you are."
+]
+
+result = tot.solve(
+    ending_sentences=ending_sentences,
+    steps=2,
+    n_generate_sample=3,
+    n_evaluate_sample=2,
+    verbose=True
+)
+
+print("Generated passages:")
+for passage in result['passages']:
+    print(passage)
+```
+
+## Task Description
+
+The implemented system focuses on the **text generation task** from the original repository:
+
+- **Input**: 4 sentences that must appear as the ending sentences of 4 paragraphs
+- **Output**: A coherent 4-paragraph passage where each paragraph ends with one of the input sentences
+- **Evaluation**: Coherency scoring based on how well the passage flows together
+
+Example input:
+```
+"It isn't difficult to do a handstand if you just stand on your hands. It caught him off guard that space smelled of seared steak. When she didn't like a guy who was trying to pick her up, she started using sign language. Each person who knows you has a different perception of who you are."
+```
+
+## Key Features
+
+### Tree-of-Thought Algorithm
+- **Generation**: Creates multiple passage candidates per step
+- **Evaluation**: Scores candidates using coherency metrics
+- **Selection**: Chooses best candidates for next iteration
+- **Iteration**: Refines solutions over multiple steps
+
+### DSPy Integration
+- **Signatures**: Structured I/O for different reasoning tasks
+- **Modules**: Reusable components with learnable parameters
+- **LM Abstraction**: Works with any DSPy-supported language model
+- **Optimization**: Can be optimized using DSPy's teleprompters
+
+### Evaluation Methods
+- **Value-based**: Direct coherency scoring (1-10 scale)
+- **Vote-based**: Tournament-style voting among candidates
+- **Comparison**: Pairwise coherency comparisons
+
+## Comparison with Original
+
+| Aspect | Original Implementation | DSPy Implementation |
+|--------|------------------------|-------------------|
+| LM Interface | Direct OpenAI API | DSPy LM abstraction |
+| Task Structure | Custom Task class | DSPy Dataset |
+| Prompts | Hardcoded strings | DSPy signatures |
+| Modularity | Monolithic | Modular components |
+| Optimization | Manual | DSPy teleprompters |
+| Extensibility | Task-specific | General framework |
+
+## Next Steps
+
+1. **LM Configuration**: Test with different DSPy LM configurations
+2. **Optimization**: Use DSPy's optimization techniques to improve prompts
+3. **Extension**: Apply to other reasoning tasks (math, planning, etc.)
+4. **Evaluation**: Compare performance with baseline methods
+5. **UI/Interface**: Add web interface for interactive exploration
+
+## Files Adapted from Original
+
+The following files from `tree-of-thought-llm/src/tot/` were adapted:
+
+- `methods/bfs.py` → `tree_of_thought.py` (core algorithm)
+- `prompts/text.py` → `modules.py` (signatures)
+- `tasks/text.py` → `dataset.py` (data loading)
+- `data/text/` → `data/text/` (unchanged)
+
+## License
+
+This implementation is based on the tree-of-thought-llm repository. Please refer to the original repository for licensing information.

@@ -1,0 +1,19 @@
+{
+  "query_id": "q2",
+  "tier": "easy",
+  "strategy": "dfs",
+  "question": "What problem does 'programming, not prompting' aim to solve?",
+  "execution_time": 0.03340315818786621,
+  "success": true,
+  "steps_taken": 1,
+  "final_answer": "\u201cProgramming\u202f\u2014\u202fnot\u202fprompting\u201d is a response to the fundamental bottleneck that current LLM pipelines face: they are built around **hand\u2011crafted, long\u2011form prompt templates** that are discovered by trial\u2011and\u2011error.  These hard\u2011coded prompts are:\n\n* **Brittle** \u2013 a small change in the task, the model, or the input often breaks the prompt.  \n* **Unscalable** \u2013 every new pipeline or domain requires a fresh set of manually tuned strings, much like hand\u2011tuning the weights of a classifier.  \n* **Opaque** \u2013 the logic of the system is hidden inside massive text blocks rather than explicit code, making debugging and reuse difficult.  \n\nThe \u201cprogramming, not prompting\u201d paradigm (embodied in DSPy) aims to **eliminate the need for manual prompt engineering** by treating LM calls as **declarative modules** that can be composed, parameterized, and automatically optimized by a compiler.  In doing so it makes LM pipelines more reliable, modular, and adaptable across models, data domains, and tasks.",
+  "evaluation_score": 9.0,
+  "individual_scores": [
+    9,
+    9,
+    9,
+    9,
+    9
+  ],
+  "n_evaluations": 5
+}
