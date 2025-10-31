@@ -1,0 +1,671 @@
+{
+  "by_strategy": {
+    "astar": {
+      "n": 8,
+      "avg_time": 1.0326007902622223,
+      "std_time": 0.31411183249012453,
+      "avg_steps": 4.0,
+      "std_steps": 1.224744871391589,
+      "time_per_step": 0.2581501975655556,
+      "success_rate": 0.0,
+      "avg_score": 7.75,
+      "std_score": 1.0897247358851685,
+      "avg_gen": 12.0,
+      "std_gen": 3.6742346141747673,
+      "avg_eval": 24.0,
+      "std_eval": 7.3484692283495345,
+      "avg_gen_calls": 4.0,
+      "avg_eval_calls": 16.0
+    },
+    "bfs": {
+      "n": 8,
+      "avg_time": 1.1405996978282928,
+      "std_time": 0.6312744673440113,
+      "avg_steps": 4.0,
+      "std_steps": 1.224744871391589,
+      "time_per_step": 0.2851499244570732,
+      "success_rate": 0.0,
+      "avg_score": 8.0,
+      "std_score": 1.224744871391589,
+      "avg_gen": 24.75,
+      "std_gen": 13.645054048995188,
+      "avg_eval": 24.75,
+      "std_eval": 13.645054048995188,
+      "avg_gen_calls": 8.25,
+      "avg_eval_calls": 4.0
+    },
+    "beam": {
+      "n": 8,
+      "avg_time": 1.3640566170215607,
+      "std_time": 0.4926647712852361,
+      "avg_steps": 4.0,
+      "std_steps": 1.224744871391589,
+      "time_per_step": 0.34101415425539017,
+      "success_rate": 0.0,
+      "avg_score": 8.0,
+      "std_score": 1.224744871391589,
+      "avg_gen": 30.0,
+      "std_gen": 11.022703842524301,
+      "avg_eval": 30.0,
+      "std_eval": 11.022703842524301,
+      "avg_gen_calls": 10.0,
+      "avg_eval_calls": 4.0
+    },
+    "best_first": {
+      "n": 8,
+      "avg_time": 0.24979114532470703,
+      "std_time": 0.058600301399045464,
+      "avg_steps": 1.625,
+      "std_steps": 0.4841229182759271,
+      "time_per_step": 0.1537176278921274,
+      "success_rate": 1.0,
+      "avg_score": 8.0,
+      "std_score": 1.224744871391589,
+      "avg_gen": 0.0,
+      "std_gen": 0.0,
+      "avg_eval": 0.0,
+      "std_eval": 0.0,
+      "avg_gen_calls": 0.0,
+      "avg_eval_calls": 0.0
+    },
+    "mcts": {
+      "n": 8,
+      "avg_time": 15.820749998092651,
+      "std_time": 4.836604724331045,
+      "avg_steps": 4.0,
+      "std_steps": 1.224744871391589,
+      "time_per_step": 3.955187499523163,
+      "success_rate": 0.0,
+      "avg_score": 7.5,
+      "std_score": 2.5,
+      "avg_gen": 520.0,
+      "std_gen": 159.21683328090657,
+      "avg_eval": 320.0,
+      "std_eval": 97.97958971132712,
+      "avg_gen_calls": 240.0,
+      "avg_eval_calls": 240.0
+    },
+    "dfs": {
+      "n": 8,
+      "avg_time": 0.5743423402309418,
+      "std_time": 0.18408601248141299,
+      "avg_steps": 4.0,
+      "std_steps": 1.224744871391589,
+      "time_per_step": 0.14358558505773544,
+      "success_rate": 0.0,
+      "avg_score": 5.0,
+      "std_score": 0.0,
+      "avg_gen": 12.0,
+      "std_gen": 3.6742346141747673,
+      "avg_eval": 12.0,
+      "std_eval": 3.6742346141747673,
+      "avg_gen_calls": 4.0,
+      "avg_eval_calls": 4.0
+    }
+  },
+  "by_tier": {
+    "easy": {
+      "n": 24,
+      "avg_time": 2.499053647120794,
+      "std_time": 4.205890242989573,
+      "avg_steps": 2.7916666666666665,
+      "std_steps": 0.49826086429589156,
+      "time_per_step": 0.8951833959835679,
+      "success_rate": 0.16666666666666666,
+      "avg_score": 6.875,
+      "std_score": 1.9856254262406425
+    },
+    "smoke": {
+      "n": 12,
+      "avg_time": 3.330418050289154,
+      "std_time": 5.5743839563145805,
+      "avg_steps": 3.5833333333333335,
+      "std_steps": 0.9537935951882998,
+      "time_per_step": 0.9294189907783685,
+      "success_rate": 0.16666666666666666,
+      "avg_score": 8.166666666666666,
+      "std_score": 1.4624940645653537
+    },
+    "stress": {
+      "n": 12,
+      "avg_time": 5.126235047976176,
+      "std_time": 8.351299354863771,
+      "avg_steps": 5.25,
+      "std_steps": 1.689427911059441,
+      "time_per_step": 0.9764257234240336,
+      "success_rate": 0.16666666666666666,
+      "avg_score": 7.583333333333333,
+      "std_score": 1.1873172373979173
+    }
+  },
+  "by_query": {
+    "q1": {
+      "winner": "best_first",
+      "answers_identical": false,
+      "results": [
+        {
+          "strategy": "astar",
+          "time": 0.8510549068450928,
+          "steps": 3,
+          "success": false,
+          "score": 5.0,
+          "answer_hash": "958efc1b74828b9d32c17460ebac9764",
+          "gen": 9,
+          "eval": 18
+        },
+        {
+          "strategy": "bfs",
+          "time": 0.7547850608825684,
+          "steps": 3,
+          "success": false,
+          "score": 5.0,
+          "answer_hash": "b2326feabdbfbcad260407a22ee75204",
+          "gen": 15,
+          "eval": 15
+        },
+        {
+          "strategy": "dfs",
+          "time": 0.4931919574737549,
+          "steps": 3,
+          "success": false,
+          "score": 5.0,
+          "answer_hash": "d41d8cd98f00b204e9800998ecf8427e",
+          "gen": 9,
+          "eval": 9
+        },
+        {
+          "strategy": "mcts",
+          "time": 11.891282081604004,
+          "steps": 3,
+          "success": false,
+          "score": 1.0,
+          "answer_hash": "e1929a23ba9d1cdac50fbb4baf84e21c",
+          "gen": 390,
+          "eval": 240
+        },
+        {
+          "strategy": "best_first",
+          "time": 0.35718607902526855,
+          "steps": 2,
+          "success": true,
+          "score": 5.0,
+          "answer_hash": "958efc1b74828b9d32c17460ebac9764",
+          "gen": 0,
+          "eval": 0
+        },
+        {
+          "strategy": "beam",
+          "time": 1.026763916015625,
+          "steps": 3,
+          "success": false,
+          "score": 5.0,
+          "answer_hash": "b2326feabdbfbcad260407a22ee75204",
+          "gen": 21,
+          "eval": 21
+        }
+      ]
+    },
+    "q2": {
+      "winner": "best_first",
+      "answers_identical": false,
+      "results": [
+        {
+          "strategy": "beam",
+          "time": 0.942753791809082,
+          "steps": 3,
+          "success": false,
+          "score": 8.0,
+          "answer_hash": "d5121ed611098c988f58ef0f215b8ca6",
+          "gen": 21,
+          "eval": 21
+        },
+        {
+          "strategy": "best_first",
+          "time": 0.13263297080993652,
+          "steps": 1,
+          "success": true,
+          "score": 9.0,
+          "answer_hash": "6a00cfb2f66236f3c77e6ae40a543524",
+          "gen": 0,
+          "eval": 0
+        },
+        {
+          "strategy": "mcts",
+          "time": 11.965245962142944,
+          "steps": 3,
+          "success": false,
+          "score": 8.0,
+          "answer_hash": "4c53a6cca27f9c671898f903e27ce414",
+          "gen": 390,
+          "eval": 240
+        },
+        {
+          "strategy": "dfs",
+          "time": 0.40252685546875,
+          "steps": 3,
+          "success": false,
+          "score": 5.0,
+          "answer_hash": "d41d8cd98f00b204e9800998ecf8427e",
+          "gen": 9,
+          "eval": 9
+        },
+        {
+          "strategy": "astar",
+          "time": 0.7537798881530762,
+          "steps": 3,
+          "success": false,
+          "score": 8.0,
+          "answer_hash": "b8e9df478dbf94781c191037d6831ea4",
+          "gen": 9,
+          "eval": 18
+        },
+        {
+          "strategy": "bfs",
+          "time": 0.6701109409332275,
+          "steps": 3,
+          "success": false,
+          "score": 8.0,
+          "answer_hash": "d5121ed611098c988f58ef0f215b8ca6",
+          "gen": 15,
+          "eval": 15
+        }
+      ]
+    },
+    "q3": {
+      "winner": "best_first",
+      "answers_identical": false,
+      "results": [
+        {
+          "strategy": "mcts",
+          "time": 11.882430076599121,
+          "steps": 3,
+          "success": false,
+          "score": 8.0,
+          "answer_hash": "e6b809f6b96530ac78d94fcacb5cafae",
+          "gen": 390,
+          "eval": 240
+        },
+        {
+          "strategy": "best_first",
+          "time": 0.26364803314208984,
+          "steps": 2,
+          "success": true,
+          "score": 8.0,
+          "answer_hash": "cbfb7737c3784f6b7f21d8c74a07036a",
+          "gen": 0,
+          "eval": 0
+        },
+        {
+          "strategy": "beam",
+          "time": 0.9362270832061768,
+          "steps": 3,
+          "success": false,
+          "score": 9.0,
+          "answer_hash": "c78b405e3349b818d7230028070292d8",
+          "gen": 21,
+          "eval": 21
+        },
+        {
+          "strategy": "bfs",
+          "time": 0.6654558181762695,
+          "steps": 3,
+          "success": false,
+          "score": 9.0,
+          "answer_hash": "c78b405e3349b818d7230028070292d8",
+          "gen": 15,
+          "eval": 15
+        },
+        {
+          "strategy": "astar",
+          "time": 0.7517657279968262,
+          "steps": 3,
+          "success": false,
+          "score": 8.0,
+          "answer_hash": "cbfb7737c3784f6b7f21d8c74a07036a",
+          "gen": 9,
+          "eval": 18
+        },
+        {
+          "strategy": "dfs",
+          "time": 0.4015669822692871,
+          "steps": 3,
+          "success": false,
+          "score": 5.0,
+          "answer_hash": "d41d8cd98f00b204e9800998ecf8427e",
+          "gen": 9,
+          "eval": 9
+        }
+      ]
+    },
+    "q4": {
+      "winner": "best_first",
+      "answers_identical": false,
+      "results": [
+        {
+          "strategy": "best_first",
+          "time": 0.26441335678100586,
+          "steps": 2,
+          "success": true,
+          "score": 8.0,
+          "answer_hash": "f40b6826e596fe950905d6e2ad445328",
+          "gen": 0,
+          "eval": 0
+        },
+        {
+          "strategy": "beam",
+          "time": 0.9365639686584473,
+          "steps": 3,
+          "success": false,
+          "score": 8.0,
+          "answer_hash": "4239483f28f6f6754e6df7025e0eb696",
+          "gen": 21,
+          "eval": 21
+        },
+        {
+          "strategy": "mcts",
+          "time": 11.816895008087158,
+          "steps": 3,
+          "success": false,
+          "score": 9.0,
+          "answer_hash": "c2b07f894133bf6e5801b6f11e619f1a",
+          "gen": 390,
+          "eval": 240
+        },
+        {
+          "strategy": "dfs",
+          "time": 0.401231050491333,
+          "steps": 3,
+          "success": false,
+          "score": 5.0,
+          "answer_hash": "d41d8cd98f00b204e9800998ecf8427e",
+          "gen": 9,
+          "eval": 9
+        },
+        {
+          "strategy": "astar",
+          "time": 0.7507929801940918,
+          "steps": 3,
+          "success": false,
+          "score": 8.0,
+          "answer_hash": "f40b6826e596fe950905d6e2ad445328",
+          "gen": 9,
+          "eval": 18
+        },
+        {
+          "strategy": "bfs",
+          "time": 0.6649830341339111,
+          "steps": 3,
+          "success": false,
+          "score": 8.0,
+          "answer_hash": "4239483f28f6f6754e6df7025e0eb696",
+          "gen": 15,
+          "eval": 15
+        }
+      ]
+    },
+    "q5": {
+      "winner": "best_first",
+      "answers_identical": false,
+      "results": [
+        {
+          "strategy": "mcts",
+          "time": 15.778758764266968,
+          "steps": 4,
+          "success": false,
+          "score": 9.0,
+          "answer_hash": "df718400b91ed319030878565e1672bd",
+          "gen": 520,
+          "eval": 320
+        },
+        {
+          "strategy": "beam",
+          "time": 1.4174690246582031,
+          "steps": 4,
+          "success": false,
+          "score": 9.0,
+          "answer_hash": "df718400b91ed319030878565e1672bd",
+          "gen": 30,
+          "eval": 30
+        },
+        {
+          "strategy": "best_first",
+          "time": 0.22490692138671875,
+          "steps": 1,
+          "success": true,
+          "score": 8.0,
+          "answer_hash": "0d0753ad564c2664477563a7111da402",
+          "gen": 0,
+          "eval": 0
+        },
+        {
+          "strategy": "bfs",
+          "time": 1.016618013381958,
+          "steps": 4,
+          "success": false,
+          "score": 9.0,
+          "answer_hash": "df718400b91ed319030878565e1672bd",
+          "gen": 21,
+          "eval": 21
+        },
+        {
+          "strategy": "astar",
+          "time": 1.083172082901001,
+          "steps": 4,
+          "success": false,
+          "score": 8.0,
+          "answer_hash": "a67c428897adcf76ff14a71cd9b37c64",
+          "gen": 12,
+          "eval": 24
+        },
+        {
+          "strategy": "dfs",
+          "time": 0.6303188800811768,
+          "steps": 4,
+          "success": false,
+          "score": 5.0,
+          "answer_hash": "d41d8cd98f00b204e9800998ecf8427e",
+          "gen": 12,
+          "eval": 12
+        }
+      ]
+    },
+    "q6": {
+      "winner": "best_first",
+      "answers_identical": false,
+      "results": [
+        {
+          "strategy": "dfs",
+          "time": 0.5399529933929443,
+          "steps": 4,
+          "success": false,
+          "score": 5.0,
+          "answer_hash": "d41d8cd98f00b204e9800998ecf8427e",
+          "gen": 12,
+          "eval": 12
+        },
+        {
+          "strategy": "bfs",
+          "time": 0.9265708923339844,
+          "steps": 4,
+          "success": false,
+          "score": 9.0,
+          "answer_hash": "01345aff61c9c7a256bff4f8953b3e6a",
+          "gen": 21,
+          "eval": 21
+        },
+        {
+          "strategy": "astar",
+          "time": 0.992966890335083,
+          "steps": 4,
+          "success": false,
+          "score": 9.0,
+          "answer_hash": "1ceae3b159afb096d9f89116ac0aeb24",
+          "gen": 12,
+          "eval": 24
+        },
+        {
+          "strategy": "best_first",
+          "time": 0.2671468257904053,
+          "steps": 2,
+          "success": true,
+          "score": 9.0,
+          "answer_hash": "26d3e6e5a0b7157601bc107ec0761fd6",
+          "gen": 0,
+          "eval": 0
+        },
+        {
+          "strategy": "beam",
+          "time": 1.3269321918487549,
+          "steps": 4,
+          "success": false,
+          "score": 9.0,
+          "answer_hash": "01345aff61c9c7a256bff4f8953b3e6a",
+          "gen": 30,
+          "eval": 30
+        },
+        {
+          "strategy": "mcts",
+          "time": 15.760203123092651,
+          "steps": 4,
+          "success": false,
+          "score": 9.0,
+          "answer_hash": "01345aff61c9c7a256bff4f8953b3e6a",
+          "gen": 520,
+          "eval": 320
+        }
+      ]
+    },
+    "q7": {
+      "winner": "best_first",
+      "answers_identical": false,
+      "results": [
+        {
+          "strategy": "astar",
+          "time": 1.5837619304656982,
+          "steps": 6,
+          "success": false,
+          "score": 8.0,
+          "answer_hash": "6cc3517689309ff07cb3e4e25f419d97",
+          "gen": 18,
+          "eval": 36
+        },
+        {
+          "strategy": "bfs",
+          "time": 2.257982015609741,
+          "steps": 6,
+          "success": false,
+          "score": 8.0,
+          "answer_hash": "0f4c400447dca0243574ad4875f1df3a",
+          "gen": 48,
+          "eval": 48
+        },
+        {
+          "strategy": "dfs",
+          "time": 0.909034013748169,
+          "steps": 6,
+          "success": false,
+          "score": 5.0,
+          "answer_hash": "d41d8cd98f00b204e9800998ecf8427e",
+          "gen": 18,
+          "eval": 18
+        },
+        {
+          "strategy": "mcts",
+          "time": 23.725064992904663,
+          "steps": 6,
+          "success": false,
+          "score": 8.0,
+          "answer_hash": "6cc3517689309ff07cb3e4e25f419d97",
+          "gen": 780,
+          "eval": 480
+        },
+        {
+          "strategy": "beam",
+          "time": 2.209005117416382,
+          "steps": 6,
+          "success": false,
+          "score": 8.0,
+          "answer_hash": "0f4c400447dca0243574ad4875f1df3a",
+          "gen": 48,
+          "eval": 48
+        },
+        {
+          "strategy": "best_first",
+          "time": 0.2239069938659668,
+          "steps": 1,
+          "success": true,
+          "score": 8.0,
+          "answer_hash": "4db360a37c09556131c688277393a0ad",
+          "gen": 0,
+          "eval": 0
+        }
+      ]
+    },
+    "q8": {
+      "winner": "best_first",
+      "answers_identical": false,
+      "results": [
+        {
+          "strategy": "beam",
+          "time": 2.1167378425598145,
+          "steps": 6,
+          "success": false,
+          "score": 8.0,
+          "answer_hash": "e49867f6b35810e25b058195bcfc7805",
+          "gen": 48,
+          "eval": 48
+        },
+        {
+          "strategy": "best_first",
+          "time": 0.26448798179626465,
+          "steps": 2,
+          "success": true,
+          "score": 9.0,
+          "answer_hash": "ba96e87a37dc88af41b165dd1e1c314f",
+          "gen": 0,
+          "eval": 0
+        },
+        {
+          "strategy": "mcts",
+          "time": 23.7461199760437,
+          "steps": 6,
+          "success": false,
+          "score": 8.0,
+          "answer_hash": "2f6a6f38bda6a0b5cb255647cce9ac06",
+          "gen": 780,
+          "eval": 480
+        },
+        {
+          "strategy": "dfs",
+          "time": 0.8169159889221191,
+          "steps": 6,
+          "success": false,
+          "score": 5.0,
+          "answer_hash": "d41d8cd98f00b204e9800998ecf8427e",
+          "gen": 18,
+          "eval": 18
+        },
+        {
+          "strategy": "astar",
+          "time": 1.4935119152069092,
+          "steps": 6,
+          "success": false,
+          "score": 8.0,
+          "answer_hash": "3d9870853ad36feedfb55aa796efbd26",
+          "gen": 18,
+          "eval": 36
+        },
+        {
+          "strategy": "bfs",
+          "time": 2.1682918071746826,
+          "steps": 6,
+          "success": false,
+          "score": 8.0,
+          "answer_hash": "e49867f6b35810e25b058195bcfc7805",
+          "gen": 48,
+          "eval": 48
+        }
+      ]
+    }
+  }
+}

@@ -206,10 +206,10 @@ for model in models:
 
 ## 📚 Documentation
 
-- **[README.md](README.md)** - Main setup and usage guide
-- **[SEARCH_STRATEGIES.md](src/dspy-tot/SEARCH_STRATEGIES.md)** - Detailed strategy comparison
-- **[MODEL_COMPARISON.md](MODEL_COMPARISON.md)** - Before/after analysis
-- **[SUMMARY.md](SUMMARY.md)** - Implementation summary
+- **[Main README](../README.md)** - Main setup and usage guide
+- **[Getting Started](getting-started.md)** - Quick setup and basic usage
+- **[Search Strategies](../dev/implementation/search-strategies.md)** - Detailed strategy comparison
+- **[Implementation Summary](../dev/summary.md)** - Implementation details
 
 ## 🚧 Future Extensions
 

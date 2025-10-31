@@ -24,6 +24,14 @@ class MonteCarloTreeSearch(SearchStrategy):
         root = SearchNode(state=initial_state, path=[initial_state], depth=0, value=0.0)
         search_history = []
 
+        # instrumentation
+        self._metrics = {
+            "total_generated": 0,
+            "total_evaluated": 0,
+            "generate_calls": 0,
+            "evaluate_calls": 0,
+        }
+
         for step in range(max_steps):
             best_reward = -float("inf")
             best_node = None
@@ -53,14 +61,16 @@ class MonteCarloTreeSearch(SearchStrategy):
 
             # Check for goal
             if best_node and is_goal_fn(best_node.state):
-                return {
+                result = {
                     "final_states": [best_node.state],
                     "search_history": search_history,
                     "strategy": "MCTS",
                     "steps_taken": step + 1,
                     "success": True,
                     "best_path": best_node.path,
+                    "metrics": self._metrics,
                 }
+                return result
 
             search_history.append(
                 {
@@ -74,14 +84,16 @@ class MonteCarloTreeSearch(SearchStrategy):
         # Return best leaf node
         best_leaf = self._get_best_leaf(root)
 
-        return {
+        result = {
             "final_states": [best_leaf.state],
             "search_history": search_history,
             "strategy": "MCTS",
             "steps_taken": max_steps,
             "success": False,
             "best_path": best_leaf.path,
+            "metrics": self._metrics,
         }
+        return result
 
     def _select_node(self, node: SearchNode) -> SearchNode:
         """Select node using UCB policy."""
@@ -98,8 +110,14 @@ class MonteCarloTreeSearch(SearchStrategy):
     ):
         """Expand node by adding children."""
         candidates = generate_fn(node.state, n_generate)
+        # instrumentation
+        self._metrics["generate_calls"] += 1
+        self._metrics["total_generated"] += len(candidates)
         if candidates:
             values = evaluate_fn(candidates)
+            # instrumentation
+            self._metrics["evaluate_calls"] += 1
+            self._metrics["total_evaluated"] += len(candidates)
             for candidate, value in zip(candidates, values):
                 child = SearchNode(
                     state=candidate,
@@ -127,12 +145,18 @@ class MonteCarloTreeSearch(SearchStrategy):
             candidates = generate_fn(
                 current_state, 2
             )  # Fewer candidates for simulation
+            # instrumentation
+            self._metrics["generate_calls"] += 1
+            self._metrics["total_generated"] += len(candidates)
             if not candidates:
                 break
 
             # Random selection for simulation
             current_state = random.choice(candidates)
             values = evaluate_fn([current_state])
+            # instrumentation
+            self._metrics["evaluate_calls"] += 1
+            self._metrics["total_evaluated"] += 1
             total_reward += values[0] if values else 0
             depth += 1
 

@@ -3,17 +3,50 @@
   "tier": "easy",
   "strategy": "astar",
   "question": "What is DSPy?",
-  "execution_time": 12.535303831100464,
-  "success": true,
-  "steps_taken": 1,
-  "final_answer": "**DSPy (Declarative\u202fLLM\u202fProgramming in\u202fPython)** is an open\u2011source Python framework created at Stanford University that lets you build, optimise, and run large\u2011language\u2011model (LLM) applications without hand\u2011crafting prompts.  \n\n### Core ideas\n| Concept | What it means in DSPy |\n|---------|-----------------------|\n| **Declarative task definition** | You describe *what* you want the model to do (e.g., \u201cquestion\u202f\u2192\u202fanswer\u201d, \u201cdocument\u202f\u2192\u202fsummary\u201d) and the success metrics (accuracy, F1, BLEU, custom KPIs). The framework turns this high\u2011level spec into a prompt automatically. |\n| **Signatures** | A `dspy.Signature` (shorthand string or class) declares the input\u2011output contract of a module. Example: `dspy.Signature(\"question -> answer\")` or a class with `InputField`/`OutputField`. |\n| **Modular pipeline** | Re\u2011usable building blocks (retrieval, chain\u2011of\u2011thought, ReAct, etc.) are connected like LEGO bricks. You can mix\u2011and\u2011match modules to create complex workflows (retrieval\u202f\u2192\u202freasoning\u202f\u2192\u202fgeneration). |\n| **Self\u2011improving prompts** | DSPy automatically selects few\u2011shot examples, applies in\u2011context learning, and can fine\u2011tune the underlying model. Prompt templates evolve through feedback loops, so you rarely need manual prompt tweaking. |\n| **Compilation** | After optimisation, the whole pipeline is compiled into clean, production\u2011ready Python code that can be imported into any app or API. |\n\n### How a typical DSPy workflow looks\n1. **Define the task** \u2013 specify the signature and the metric(s) you care about.  \n2. **Provide data (optional)** \u2013 a small set of labeled or unlabeled examples helps bootstrap the pipeline.  \n3. **Assemble modules** \u2013 pick from built\u2011in components (e.g., `dspy.Retrieve`, `dspy.ChainOfThought`, `dspy.ReAct`) and chain them together.  \n4. **Run optimisation** \u2013 DSPy iteratively refines prompts, selects the most relevant few\u2011shot examples, and may fine\u2011tune the model.  \n5. **Compile & deploy** \u2013 the final pipeline is emitted as ordinary Python code that can be called like any function.\n\n### Key benefits\n- **Reduced development time** \u2013 no more trial\u2011and\u2011error prompt engineering; you focus on the task logic.  \n- **Improved reliability** \u2013 declarative specs and explicit metrics give consistent, reproducible outputs.  \n- **Scalability & adaptability** \u2013 change the task definition or metrics and the pipeline re\u2011configures itself automatically, making it easy to switch domains (e.g., from tech support to healthcare).  \n- **Modularity & reuse** \u2013 components are reusable across projects, promoting clean, maintainable codebases.  \n- **Open\u2011source ecosystem** \u2013 plugins for vector stores (Pinecone, Qdrant, ChromaDB, Marqo), community notebooks, Discord, and GitHub discussions accelerate learning and integration.\n\n### Typical use\u2011cases\n- **Intelligent QA** (retrieval\u2011augmented + chain\u2011\u2011thought reasoning)  \n- **Document summarisation** (custom length/style control)  \n- **Code generation assistants** (turn natural\u2011language specs into snippets)  \n- **Domain\u2011specific translation** (preserve idioms, legal/medical jargon)  \n- **Conversational agents** with memory, multi\u2011step reasoning, and action execution.\n\n### Getting started\n```bash\n# Core library\npip install dspy-ai\n\n# Optional integrations (example: Pinecone vector store)\npip install \"dspy-ai[pinecone]\"\n```\nAfter installation, the official docs, GitHub repo, Colab notebooks, and the DSPy Discord provide tutorials ranging from a \u201cHello\u2011World\u201d QA pipeline to advanced multi\u2011module workflows.\n\n### TL;DR\nDSPy turns LLM development into **declarative programming**: you state the desired input\u2011output behavior and success criteria, assemble reusable modules, and let the framework automatically optimise prompts and compile a production\u2011ready pipeline. This eliminates the fragile, manual prompt\u2011engineering loop, speeds up development, and yields more reliable, scalable AI applications.",
-  "evaluation_score": 9.0,
+  "execution_time": 0.8510549068450928,
+  "success": false,
+  "steps_taken": 3,
+  "final_answer": "DSPy's declarative approach to prompt engineering makes it easier to build complex AI systems. With DSPy, you define tasks, construct pipelines, and optimize prompts automatically. This framework offers improved reliability, simplified development, adaptability, and scalability compared to traditional prompt engineering methods. DSPy's declarative approach to prompt engineering makes it easier to build complex AI systems. With DSPy, you define tasks, construct pipelines, and optimize prompts automatically. This framework offers improved reliability, simplified development, adaptability, and scalability compared to traditional prompt engineering methods.\n\nDSPy's declarative approach to prompt engineering makes it easier to build complex AI systems. With DSPy, you define tasks, construct pipelines, and optimize prompts automatically. This framework offers improved reliability, simplified development, adaptability, and scalability compared to traditional prompt engineering methods.\n\nDSPy's declarative approach to prompt engineering makes it easier to build complex AI systems. With DSPy, you define tasks, construct pipelines, and optimize prompts automatically. This framework offers improved reliability, simplified development, adaptability, and scalability compared to traditional prompt engineering methods.\n\nDSPy's declarative approach to prompt engineering makes it easier to build complex AI systems. With DSPy, you define tasks, construct pipelines, and optimize prompts automatically. This framework offers improved reliability, simplified development, adaptability, and scalability compared to traditional prompt engineering methods.",
+  "evaluation_score": 5.0,
   "individual_scores": [
-    9,
-    9,
-    9,
-    9,
-    9
+    5,
+    5,
+    5,
+    5,
+    5
   ],
-  "n_evaluations": 5
+  "n_evaluations": 5,
+  "score_variance": 0.0,
+  "search_history": [
+    {
+      "step": 0,
+      "current_state": "",
+      "f_score": 0.0,
+      "g_score": 0.0,
+      "open_set_size": 3,
+      "closed_set_size": 1
+    },
+    {
+      "step": 1,
+      "current_state": "DSPy's declarative approach to prompt engineering makes it easier to build complex AI systems. With DSPy, you define tasks, construct pipelines, and optimize prompts automatically. This framework offers improved reliability, simplified development, adaptability, and scalability compared to traditional prompt engineering methods.",
+      "f_score": -15.0,
+      "g_score": -7.0,
+      "open_set_size": 5,
+      "closed_set_size": 2
+    },
+    {
+      "step": 2,
+      "current_state": "DSPy's declarative approach to prompt engineering makes it easier to build complex AI systems. With DSPy, you define tasks, construct pipelines, and optimize prompts automatically. This framework offers improved reliability, simplified development, adaptability, and scalability compared to traditional prompt engineering methods. DSPy's declarative approach to prompt engineering makes it easier to build complex AI systems. With DSPy, you define tasks, construct pipelines, and optimize prompts automatically. This framework offers improved reliability, simplified development, adaptability, and scalability compared to traditional prompt engineering methods.\n\nDSPy's declarative approach to prompt engineering makes it easier to build complex AI systems. With DSPy, you define tasks, construct pipelines, and optimize prompts automatically. This framework offers improved reliability, simplified development, adaptability, and scalability compared to traditional prompt engineering methods.\n\nDSPy's declarative approach to prompt engineering makes it easier to build complex AI systems. With DSPy, you define tasks, construct pipelines, and optimize prompts automatically. This framework offers improved reliability, simplified development, adaptability, and scalability compared to traditional prompt engineering methods.\n\nDSPy's declarative approach to prompt engineering makes it easier to build complex AI systems. With DSPy, you define tasks, construct pipelines, and optimize prompts automatically. This framework offers improved reliability, simplified development, adaptability, and scalability compared to traditional prompt engineering methods.",
+      "f_score": -16.0,
+      "g_score": -11.0,
+      "open_set_size": 7,
+      "closed_set_size": 3
+    }
+  ],
+  "metrics": {
+    "total_generated": 9,
+    "total_evaluated": 18,
+    "generate_calls": 3,
+    "evaluate_calls": 12
+  }
 }

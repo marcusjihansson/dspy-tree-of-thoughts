@@ -23,7 +23,15 @@ class DepthFirstSearch(SearchStrategy):
         search_history = []
         best_states = []
 
+        # instrumentation
+        total_generated = 0
+        total_evaluated = 0
+        generate_calls = 0
+        evaluate_calls = 0
+
         def dfs_recursive(state: str, depth: int, path: List[str]) -> bool:
+            nonlocal total_generated, total_evaluated, generate_calls, evaluate_calls
+
             if depth >= max_depth or len(search_history) >= max_steps:
                 return False
 
@@ -33,11 +41,15 @@ class DepthFirstSearch(SearchStrategy):
 
             # Generate candidates
             candidates = generate_fn(state, kwargs.get("n_generate", 3))
+            generate_calls += 1
+            total_generated += len(candidates)
             if not candidates:
                 return False
 
             # Evaluate candidates
             values = evaluate_fn(candidates)
+            evaluate_calls += 1
+            total_evaluated += len(candidates)
 
             # Sort by value (best first)
             candidate_value_pairs = list(zip(candidates, values))
@@ -51,6 +63,10 @@ class DepthFirstSearch(SearchStrategy):
                     "candidates": candidates,
                     "values": values,
                     "path": path.copy(),
+                    "generated_this_step": len(candidates),
+                    "evaluated_this_step": len(candidates),
+                    "generate_calls_this_step": 1,
+                    "evaluate_calls_this_step": 1,
                 }
             )
 
@@ -70,4 +86,10 @@ class DepthFirstSearch(SearchStrategy):
             "strategy": "DFS",
             "steps_taken": len(search_history),
             "success": found_goal,
+            "metrics": {
+                "total_generated": total_generated,
+                "total_evaluated": total_evaluated,
+                "generate_calls": generate_calls,
+                "evaluate_calls": evaluate_calls,
+            },
         }

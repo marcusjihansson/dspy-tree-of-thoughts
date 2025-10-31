@@ -20,9 +20,23 @@ class AStarSearch(SearchStrategy):
                heuristic_fn: Optional[Callable[[str], float]] = None,
                **kwargs) -> Dict[str, Any]:
         
+        # instrumentation
+        total_generated = 0
+        total_evaluated = 0
+        generate_calls = 0
+        evaluate_calls = 0
+
+        # Wrap evaluate_fn for heuristic if needed so we count those calls
+        def heuristic_eval(state: str) -> float:
+            nonlocal total_evaluated, evaluate_calls
+            vals = evaluate_fn([state])
+            evaluate_calls += 1
+            total_evaluated += 1
+            return vals[0] if vals else 0.0
+
         if heuristic_fn is None:
-            # Use evaluation function as heuristic
-            heuristic_fn = lambda state: evaluate_fn([state])[0] if state else 0.0
+            # Use evaluation function as heuristic (counted)
+            heuristic_fn = lambda state: heuristic_eval(state) if state else 0.0
         
         # Priority queue: (f_score, g_score, state, path)
         open_set = [(0.0, 0.0, initial_state, [initial_state])]
@@ -47,13 +61,23 @@ class AStarSearch(SearchStrategy):
                     'strategy': 'A*',
                     'steps_taken': step,
                     'success': True,
-                    'best_path': path
+                    'best_path': path,
+                    'metrics': {
+                        'total_generated': total_generated,
+                        'total_evaluated': total_evaluated,
+                        'generate_calls': generate_calls,
+                        'evaluate_calls': evaluate_calls,
+                    },
                 }
             
             # Generate successors
             candidates = generate_fn(current_state, kwargs.get('n_generate', 3))
+            generate_calls += 1
+            total_generated += len(candidates)
             if candidates:
                 values = evaluate_fn(candidates)
+                evaluate_calls += 1
+                total_evaluated += len(candidates)
                 
                 for candidate, value in zip(candidates, values):
                     if candidate in closed_set:
@@ -89,5 +113,11 @@ class AStarSearch(SearchStrategy):
             'search_history': search_history,
             'strategy': 'A*',
             'steps_taken': step,
-            'success': False
+            'success': False,
+            'metrics': {
+                'total_generated': total_generated,
+                'total_evaluated': total_evaluated,
+                'generate_calls': generate_calls,
+                'evaluate_calls': evaluate_calls,
+            },
         }

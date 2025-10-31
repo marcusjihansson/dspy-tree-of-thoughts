@@ -1,0 +1,28 @@
+OVERALL STRATEGY PERFORMANCE:
+- astar: success=0.00, avg_time=1.033s, avg_score=7.75, gen=12.0, eval=24.0
+- bfs: success=0.00, avg_time=1.141s, avg_score=8.00, gen=24.8, eval=24.8
+- beam: success=0.00, avg_time=1.364s, avg_score=8.00, gen=30.0, eval=30.0
+- best_first: success=1.00, avg_time=0.250s, avg_score=8.00, gen=0.0, eval=0.0
+- mcts: success=0.00, avg_time=15.821s, avg_score=7.50, gen=520.0, eval=320.0
+- dfs: success=0.00, avg_time=0.574s, avg_score=5.00, gen=12.0, eval=12.0
+
+PERFORMANCE BY DIFFICULTY TIER:
+- easy: success=0.17, avg_time=2.499s, avg_score=6.88
+- smoke: success=0.17, avg_time=3.330s, avg_score=8.17
+- stress: success=0.17, avg_time=5.126s, avg_score=7.58
+
+QUERY-BY-QUERY WINNERS (by time among successful):
+- q1: winner=best_first, answers_identical=False
+- q2: winner=best_first, answers_identical=False
+- q3: winner=best_first, answers_identical=False
+- q4: winner=best_first, answers_identical=False
+- q5: winner=best_first, answers_identical=False
+- q6: winner=best_first, answers_identical=False
+- q7: winner=best_first, answers_identical=False
+- q8: winner=best_first, answers_identical=False
+
+KEY INSIGHTS:
+- Best-first search is fastest and most successful, with 100% success rate but minimal exploration.
+- MCTS explores most thoroughly (high gen/eval counts) but is slowest.
+- Other strategies show 0% success, indicating potential issues with evaluation or task complexity.
+- Success rates are low overall, suggesting the search strategies may need tuning for this QA task.

@@ -13,7 +13,11 @@ This directory contains a model-agnostic implementation of Tree-of-Thought reaso
 ## Files
 
 - `main.py` - Main demo script showing tree-of-thought reasoning
-- `tree_of_thought.py` - Core tree-of-thought algorithm adapted for DSPy
+- `methods/` - Modular search strategy implementations
+  - `tree_of_thought.py` - Core TreeOfThought class
+  - `base.py` - Base classes and utilities
+  - `bfs.py`, `dfs.py`, `mct.py`, `astar.py`, `beam_search.py`, `best_first.py` - Individual search strategies
+  - `factory.py` - Strategy factory pattern
 - `modules.py` - DSPy modules for generation, evaluation, voting, comparison
 - `signatures.py` - DSPy signatures defining input/output interfaces
 - `evaluation.py` - Evaluation system using DSPy LM calls
